@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+	<!-- 配置dao实现类的bean -->
+	<bean id="employeeDao" class="com.jun.ssh.dao.impl.EmployeeDaoImpl">
+		<property name="sessionFacory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配置service实现类的bean -->
+	<bean id="employeeService" class="com.jun.ssh.service.impl.EmployeeServiceImpl">
+		<property name="employeeDao" ref="employeeDao"></property>
+	</bean>
+	<!-- 配置action bean-->
+	<bean id="employeeAction" class="com.jun.ssh.action.EmployeeAction"
+		scope="prototype">
+		<property name="employeeService" ref="employeeService"></property>
+	</bean>
+	
+</beans>
